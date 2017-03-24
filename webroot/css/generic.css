@@ -14,6 +14,8 @@ table {
   margin: 0 auto;
   text-align: center;
   padding: 10px; }
+  .form-action.payment {
+    box-shadow: #242424 0px 1px 9px; }
   .form-action form {
     display: inline;
     text-align: right; }
@@ -33,5 +35,37 @@ table {
       margin-right: 10px; }
   .form-action .form-group {
     margin: 12px 0; }
+
+.bg-container {
+  position: absolute;
+  z-index: 98;
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #fff;
+  opacity: 0.9;
+  top: 0;
+  left: 0; }
+
+.modal-window {
+  position: absolute;
+  z-index: 99;
+  left: 40%;
+  top: 40%;
+  display: block;
+  width: 50%;
+  background: #fff; }
+
+.close-window {
+  position: absolute;
+  right: 5px;
+  top: 5px; }
+
+.clickable {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer; }
+  .clickable:hover {
+    text-decoration: none; }
 
 /*# sourceMappingURL=generic.css.map */

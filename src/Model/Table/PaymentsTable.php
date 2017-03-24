@@ -52,21 +52,8 @@ class PaymentsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('name', 'create')
-            ->notEmpty('name');
-
-        $validator
-            ->allowEmpty('description');
-
-        $validator
-            ->decimal('balance')
-            ->requirePresence('balance', 'create')
-            ->notEmpty('balance');
-
-        $validator
-            ->decimal('interest')
-            ->requirePresence('interest', 'create')
-            ->notEmpty('interest');
+            ->requirePresence('amount', 'create')
+            ->notEmpty('amount');
 
         return $validator;
     }

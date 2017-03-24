@@ -53,6 +53,14 @@ Router::scope('/api', function (RouteBuilder $routes) {
             ]
         ]
     ]);
+    $routes->resources('Payments',[
+        'map' => [
+            'add_payment' => [
+                'action' => 'getPaymentForm',
+                'method' => 'GET'
+            ]
+        ]
+    ]);
 
 });
 Router::scope('/', function (RouteBuilder $routes) {

@@ -49,17 +49,48 @@ class PaymentsController extends AppController
     public function add()
     {
         $payment = $this->Payments->newEntity();
-        if ($this->request->is('post')) {
-            $payment = $this->Payments->patchEntity($payment, $this->request->getData());
-            if ($this->Payments->save($payment)) {
-                $this->Flash->success(__('The payment has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+        if ($this->request->is('post')) {
+
+            $this->loadModel('Debts');
+            $debt = $this->Debts->find()
+                ->contain(['Payments'])
+                ->where(['id' => $this->request->getData('debt_id')])
+                ->first();
+
+            if (null == $debt) {
+                return null;
             }
-            $this->Flash->error(__('The payment could not be saved. Please, try again.'));
+
+            $payment = $this->Payments->patchEntity($payment, $this->request->getData());
+            $spread = $debt->interest - $payment->amount;
+
+            if ($spread >= 0) {
+                $debt->interest = $spread;
+            } else {
+                $debt->interest = 0;
+                $debt->balance = $debt->balance + $spread;
+            }
+
+            if ($this->Payments->save($payment) && $this->Debts->save($debt)) {
+                $debt = $this->Debts->find()
+                    ->contain(['Payments'])
+                    ->where(['id' => $this->request->getData('debt_id')])
+                    ->first();
+                if (!$this->request->accepts('application/json')) {
+                    $this->Flash->success(__('The payment has been saved.'));
+                    return $this->redirect(['action' => 'index']);
+                }
+            }
+
+            if (!$this->request->accepts('application/json')) {
+                $this->Flash->error(__('The payment could not be saved. Please, try again.'));
+            }
+
         }
-        $this->set(compact('payment'));
-        $this->set('_serialize', ['payment']);
+
+        $this->set(compact('debt'));
+        $this->set('_serialize', ['debt']);
     }
 
     /**
@@ -105,5 +136,13 @@ class PaymentsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /*
+     * Load payment form
+     */
+    public function getPaymentForm()
+    {
+        $this->render('/Element/forms/payment', 'ajax');
     }
 }

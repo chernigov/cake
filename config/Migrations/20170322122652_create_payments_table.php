@@ -34,15 +34,22 @@ class CreatePaymentsTable extends AbstractMigration
     public function change()
     {
         $table = $this->table($this->tableName);
-        $table->addColumn('type', 'string', [
-            'limit' => 255
-        ]);
         $table->addColumn('amount', 'integer', [
             'comment' => 'Amount'
         ]);
         $table->addColumn('debt_id', 'integer', [
-            'comment' => 'Amount'
+            'comment' => 'Foreign key'
         ])->addForeignKey('debt_id', 'debts', 'id');
+        $table->addColumn('created', 'datetime', [
+            'default' => null,
+            'null' => false,
+            'comment' => 'Created',
+        ]);
+        $table->addColumn('modified', 'datetime', [
+            'default' => null,
+            'null' => false,
+            'comment' => 'Modified',
+        ]);
         $table->create();
     }
 }

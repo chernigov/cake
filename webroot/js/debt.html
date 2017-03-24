@@ -7,6 +7,7 @@
         <th>Interest</th>
         <th>Type</th>
         <th>Date</th>
+        <th>Payments</th>
         <th>Action</th>
     </tr>
     <tr class="filter">
@@ -20,6 +21,8 @@
             <button data-ng-click="$ctrl.setFilter()">go</button>
             <button data-ng-click="$ctrl.resetFilter()">reset</button>
         </td>
+        <td></td>
+        <td></td>
     </tr>
     <tr data-ng-repeat="debt in $ctrl.debtList track by $index">
         <td>{{debt.id}}</td>
@@ -27,11 +30,29 @@
         <td>{{debt.balance}}</td>
         <td>{{debt.interest}}</td>
         <td>{{debt.type}}</td>
-        <td>{{debt.created| date: 'medium' }}</td>
-        <td></td>
+        <td>{{debt.created| date: 'dd.MM.yyyy' }}</td>
+        <td data-ng-click="$ctrl.showPayments($index,$event)" class="clickable">
+            {{debt.payments.length}}
+       <div class="payment-table" id="payment-table-{{$index}}" style="display: none">
+           <button class="close-window" data-ng-click="$ctrl.hidePayments($index,$event)">x</button>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>amount</th>
+                <th>date</th>
+            <tr data-ng-repeat="payment in debt.payments track by $index">
+                <td>{{payment.amount}}</td>
+                <td>{{payment.amount}}</td>
+                <td>{{payment.created| date: 'dd.MM.yyyy' }}</td>
+            </tr>
+            </tr></table>
+       </div>
+        </td>
+        <td>
+            <button data-ng-click="$ctrl.getAction($index)">Add Payment</button>
+        </td>
     </tr>
 </table>
-
 <div class="form-action">
-<form-add><?= __('Loading'); ?>...</form-add>
+    <form-add><?= __('Loading'); ?>...</form-add>
 </div>

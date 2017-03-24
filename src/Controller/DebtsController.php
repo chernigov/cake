@@ -117,4 +117,5 @@ class DebtsController extends AppController
     {
         $this->render('/Element/forms/debt', 'ajax');
     }
+
 }

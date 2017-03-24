@@ -13,7 +13,7 @@ class CreateDebtsTable extends AbstractMigration
     /**
      * Create Table with columns
      */
-    public function up()
+    public function change()
     {
         $table = $this->table($this->tableName);
         $table->addColumn('name', 'string', [
@@ -52,14 +52,5 @@ class CreateDebtsTable extends AbstractMigration
             'comment' => 'Modified',
         ]);
         $table->create();
-    }
-
-    /**
-     * Drop current Table
-     */
-    public function down()
-    {
-        $table = $this->table($this->tableName);
-        $table->drop();
     }
 }
