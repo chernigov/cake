@@ -37,7 +37,7 @@ function debitsController($http) {
 
 app.component('debitComponent', {
     controller: debitsController,
-    templateUrl: '/js/debit.html',
+    templateUrl: '/js/debt.html',
     bindings: {
         debtList: '@'
     }

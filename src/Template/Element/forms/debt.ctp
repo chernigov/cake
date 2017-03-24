@@ -21,6 +21,10 @@
             <option value="unpaid"><?=  __('Unpaid'); ?></option>
         </select>
     </div>
-    <input type="submit" value="Submit" />
+
+    <div class="form-group">
+        <input type="submit" value="Submit" />
+    </div>
+
 </form>
 </section>

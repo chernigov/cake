@@ -32,7 +32,7 @@ class PaymentsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('debts');
+        $this->setTable('payments');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 

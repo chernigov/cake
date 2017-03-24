@@ -37,6 +37,10 @@ class CreateDebtsTable extends AbstractMigration
             'null' => false,
             'comment' => 'Interest',
         ]);
+        $table->addColumn('type', 'string', [
+            'null' => true,
+            'comment' => 'Type',
+        ]);
         $table->addColumn('created', 'datetime', [
             'default' => null,
             'null' => false,
@@ -55,7 +59,7 @@ class CreateDebtsTable extends AbstractMigration
      */
     public function down()
     {
-        $table = $this->table($this->table);
+        $table = $this->table($this->tableName);
         $table->drop();
     }
 }

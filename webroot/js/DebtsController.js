@@ -6,6 +6,8 @@ function debitsController($http, $filter) {
 
     var ctrl = this;
     ctrl.debtList = [];
+    ctrl.debtListTemp = [];
+    ctrl.debtListFiltred = [];
     ctrl.form = {
         name: '',
         balance: '',
@@ -38,24 +40,37 @@ function debitsController($http, $filter) {
         });
     }
 
-    ctrl.setFilter = function (data) {
+    /**
+     * Live filter by the date
+     */
+    ctrl.setFilter = function () {
 
-        letter = ctrl.filter.id;
-        items = ctrl.debtList
+        var date = ctrl.filter.date;
 
-        $filter(
-             function (items, letter) {
-                var filtered = [];
-                var letterMatch = new RegExp(letter, 'i');
-                for (var i = 0; i < items.length; i++) {
-                    var item = items[i];
-                    if (letterMatch.test(item.name.substring(0, 1))) {
-                        filtered.push(item);
-                    }
+        ctrl.debtList.forEach(function (val) {
+            
+            if (val.created) {
+                var dateToFind = new Date(Date.parse(val.created));
+                dateToFind.setHours(0, 0, 0, 0);
+                
+                if (Date.parse(dateToFind) == date.getTime()) {
+                    ctrl.debtListFiltred.push(val);
                 }
-                return filtered;
             }
-        );
+        });
+        ctrl.debtListTemp = angular.copy(ctrl.debtList);
+        ctrl.debtList = ctrl.debtListFiltred;
+    }
+    
+    /**
+     * Reset current filter
+     */
+    ctrl.resetFilter = function () {
+
+       if(ctrl.debtListTemp.length){
+           ctrl.debtList = ctrl.debtListTemp;
+       }
+
     }
 }
 

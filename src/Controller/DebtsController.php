@@ -18,7 +18,7 @@ class DebtsController extends AppController
      */
     public function index()
     {
-        $debts = $this->paginate($this->Debts);
+        $debts = $this->Debts->find('all')->contain(['Payments']);
         $this->set('title', __('Debt Collection'));
         $this->set(compact('debts'));
         $this->set('_serialize', ['debts']);
