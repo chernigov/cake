@@ -1,0 +1,11 @@
+table {
+  max-width: 100%;
+  min-width: 600px;
+  margin: 0 auto;
+  border: 1px solid #333; }
+  table tr {
+    background: #fff; }
+  table tr:nth-child(even) {
+    background: #f3f3f3; }
+
+/*# sourceMappingURL=generic.css.map */

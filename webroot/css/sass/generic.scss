@@ -1,0 +1,50 @@
+table {
+  max-width: 100%;
+  width: 600px;
+  margin: 0 auto;
+  border: 3px solid rgba(225, 225, 225, 0.99);
+
+  tr {
+    background: #fff;
+  }
+
+  tr:nth-child(even) {
+    background: #f3f3f3;
+  }
+
+}
+
+.form-action {
+  max-width: 100%;
+  width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 10px;
+
+  form {
+    display: inline;
+    text-align: right;
+    select{
+      width: 80%;
+      height: 32px;
+    }
+    input {
+      width: 80%;
+      height: 32px;
+    }
+    input[type=submit] {
+      width: 30%;
+      height: 32px;
+    }
+    input.filter {
+      width: 100%;
+      height: 16px;
+    }
+    label{
+      margin-right: 10px;
+    }
+  }
+  .form-group{
+    margin: 12px 0;
+  }
+}

@@ -1,0 +1,34 @@
+<br>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Balance</th>
+        <th>Interest</th>
+        <th>Type</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+    <tr class="filter">
+        <td><input data-ng-change="$ctrl.setFilter('id')" type="text" data-ng-model="$ctrl.filter.id"></td>
+        <td><input type="text" data-ng-model="$ctrl.filter.name"></td>
+        <td><input type="text" data-ng-model="$ctrl.filter.balance"></td>
+        <td><input type="text" data-ng-model="$ctrl.filter.interest"></td>
+        <td><input type="text" data-ng-model="$ctrl.filter.type"></td>
+        <td><input type="text" data-ng-model="$ctrl.filter.date"></td>
+        <td></td>
+    </tr>
+    <tr data-ng-repeat="debt in $ctrl.debtList track by $index">
+        <td>{{debt.id}}</td>
+        <td>{{debt.name}}</td>
+        <td>{{debt.balance}}</td>
+        <td>{{debt.interest}}</td>
+        <td>{{debt.type}}</td>
+        <td>{{debt.created| date: 'medium' }}</td>
+        <td></td>
+    </tr>
+</table>
+
+<div class="form-action">
+        <form-add><?= __('Loading'); ?>...</form-add>
+</div>
